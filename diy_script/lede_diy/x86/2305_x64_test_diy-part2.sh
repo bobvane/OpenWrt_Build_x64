@@ -20,8 +20,8 @@ sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-GXNAS'"
 sed -i "s/hostname='.*'/hostname='OpenWrt-GXNAS'/g" ./package/base-files/files/bin/config_generate
 
 # 修改默认IP
-sed -i 's/192.168.1.1/192.168.18.1/g' package/base-files/files/bin/config_generate
-sed -i 's/192.168.1.1/192.168.18.1/g' package/base-files/luci2/bin/config_generate
+sed -i 's/192.168.1.1/192.168.1.11/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.1.11/g' package/base-files/luci2/bin/config_generate
 
 # 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
 sed -i '/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF./d' package/lean/default-settings/files/zzz-default-settings
@@ -78,7 +78,7 @@ rm -rf feeds/luci/applications/{luci-app-frpc,luci-app-frps,luci-app-hd-idle,luc
 merge_package master https://github.com/immortalwrt/luci package/custom applications/luci-app-filebrowser applications/luci-app-syncdial applications/luci-app-eqos applications/luci-app-nps applications/luci-app-nfs applications/luci-app-frpc applications/luci-app-frps applications/luci-app-hd-idle applications/luci-app-adblock applications/luci-app-socat
 
 # homeproxy
-git clone --depth=1 https://github.com/muink/luci-app-homeproxy.git package/luci-app-homeproxy
+git clone --depth=1 https://github.com/immortalwrt/homeproxy.git package/luci-app-homeproxy
 
 # mihomo
 git clone --depth=1 https://github.com/morytyann/OpenWrt-mihomo package/luci-app-mihomo
@@ -93,7 +93,7 @@ rm -rf feeds/luci/applications/luci-app-passwall
 merge_package main https://github.com/xiaorouji/openwrt-passwall package/custom luci-app-passwall
 
 # passwall2
-merge_package main https://github.com/xiaorouji/openwrt-passwall2 package/custom luci-app-passwall2
+# merge_package main https://github.com/xiaorouji/openwrt-passwall2 package/custom luci-app-passwall2
 
 # openclash
 rm -rf feeds/luci/applications/luci-app-openclash
@@ -109,6 +109,7 @@ rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/luci/applications/luci-app-argon-config
 git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
+git clone --depth=1 -b js https://github.com/lwb1978/luci-theme-kucat package/luci-theme-kucat
 
 # 更改argon主题背景
 cp -f $GITHUB_WORKSPACE/personal/bg1.jpg package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
